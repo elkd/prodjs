@@ -70,6 +70,10 @@ sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$3'@'localhost' WITH GRANT OPTION
 sudo mysql -e "FLUSH PRIVILEGES"
 
 
+mkdir ./logs
+touch ./logs/nginx-access.log ./logs/nginx-error.log
+
+
 
 sudo cp ~/prodjs/nginx.conf /etc/nginx/sites-available/$4
 

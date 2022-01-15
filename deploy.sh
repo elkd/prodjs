@@ -36,7 +36,7 @@ nrm use taobao
 
 sudo npm install pm2@latest node-gyp -g
 
-npm install
+sudo npm install
 
 pm2 startOrGracefulReload ~/mshop/server/pm2.json
 #This will start on localhost:8360
@@ -62,14 +62,14 @@ sudo apt-cache policy mysql-server
 #sudo mysql
 #
 #create a user 
-#CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
-#CREATE DATABASE $3 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
-# GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost' WITH GRANT OPTION;
-# FLUSH PRIVILEGES;
+sudo mysql -e "CREATE USER '$3'@'localhost' IDENTIFIED BY $6"
+sudo mysql -e "CREATE DATABASE $3 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci"
 
 
-#sudo mysql -u user -p $3 < /home/ubuntu/server/hiolabsDB.sql
+sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$3'@'localhost' WITH GRANT OPTION"
+sudo mysql -e "FLUSH PRIVILEGES"
+
+
 
 sudo cp ~/prodjs/nginx.conf /etc/nginx/sites-available/$4
 
@@ -84,4 +84,8 @@ sudo nginx -t && sudo systemctl restart nginx
 sudo apt-get update
 sudo apt-get install python3-certbot-nginx -y
 sudo certbot --noninteractive --agree-tos -d $4.$5 -d www.$4.$5 --register-unsafely-without-email --nginx
+
+
+#If you have dump file 
+#sudo mysql -u $3 -p $3 < ~/$3/location-to-dump.sql
 

@@ -9,8 +9,6 @@ sudo apt install -y nodejs
 sudo apt install -y build-essential mysql-server nginx wget
 
 
-
-
 sudo update-alternatives --set editor /usr/bin/vim.basic
 
 ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N "" -C "$1"
@@ -22,8 +20,10 @@ ssh-add -k ~/.ssh/id_rsa
 
 RSA_KEY=$(cat ~/.ssh/id_rsa.pub)
 
-#More https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+#Disable StrictHostKeyChecking for git clone command
+echo 'StrictHostKeyChecking no' >> ~/.ssh/config
 
+#More https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 #Sometimes pasting these lines to other editors destroy the spacing encoding and the bash will fail to parse spaces
 curl -H "Authorization: token $1" --data '{"title":"EC2-instance-'"$3"'-ID'"$RANDOM"'","key":"'"$RSA_KEY"'"}' https://api.github.com/user/keys
 

@@ -87,7 +87,7 @@ sudo nginx -t && sudo systemctl restart nginx
 
 sudo apt-get update
 sudo apt-get install python3-certbot-nginx -y
-sudo certbot --noninteractive --agree-tos -d $4.$5 -d www.$4.$5 --register-unsafely-without-email --nginx
+sudo certbot --noninteractive --agree-tos -d $4.$5 -d www.$4.$5 --register-unsafely-without-email --nginx --redirect
 
 
 #If you have dump file 
